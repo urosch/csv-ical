@@ -4,12 +4,11 @@ There are a bunch of configurable variables
 """
 
 import csv
-import datetime
 from pathlib import Path
 from platform import uname
 from typing import Any, Dict, List, Optional, Union
 from uuid import uuid4
-
+import datetime
 from icalendar import Calendar, Event
 
 
