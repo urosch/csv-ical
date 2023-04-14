@@ -61,6 +61,19 @@ class Convert():
         self.csv_data = self.csv_data[csv_configs['HEADER_ROWS_TO_SKIP']:]
         return self.csv_data
 
+    def read_csv2(
+        self,
+        csv_location: Union[str, Path],
+        csv_configs: Optional[Dict[str, int]] = None
+    ) -> List[List[Any]]:
+        """ Read the csv file """
+        csv_configs = self._generate_configs_from_default(csv_configs)
+        with open(csv_location, 'r', encoding='utf-8') as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=';')
+            self.csv_data = list(csv_reader)
+        self.csv_data = self.csv_data[csv_configs['HEADER_ROWS_TO_SKIP']:]
+        return self.csv_data
+
     def make_ical(
         self,
         csv_configs: Optional[Dict[str, int]] = None,
@@ -77,6 +90,7 @@ class Convert():
             event.add('location', row[csv_configs['CSV_LOCATION']])
             event.add('uid', uuid4().hex + '@' + uname().node)
             event.add('dtstamp', datetime.datetime.now())
+            event.allday = True
             self.cal.add_component(event)
         return self.cal
 

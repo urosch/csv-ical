@@ -27,14 +27,16 @@ while i < len(convert.csv_data):
     start_date = row[csv_configs['CSV_START_DATE']]
     end_date = row[csv_configs['CSV_END_DATE']]
     try:
-        startal = datetime.strptime(start_date, '%Y-%d-%mT%H:%M:%S')
-        row[csv_configs['CSV_START_DATE']] = startal.date()
-        konec = datetime.strptime(end_date, '%Y-%d-%mT%H:%M:%S')
-        row[csv_configs['CSV_END_DATE']] = konec.date()
+        start_neobdelan = datetime.strptime(start_date, '%Y-%d-%mT%H:%M:%S')
+        row[csv_configs['CSV_START_DATE']] = start_neobdelan.date()
+        end_neobdelan = datetime.strptime(end_date, '%Y-%d-%mT%H:%M:%S')
+        row[csv_configs['CSV_END_DATE']] = end_neobdelan.date()
         i += 1
+        print(start_neobdelan.date())
+        print(end_neobdelan.date())
     except ValueError:
         convert.csv_data.pop(i)
-        print(convert.csv_data)
+#        print(convert.csv_data)
     row[csv_configs['CSV_NAME']] = row[csv_configs['CSV_NAME']]
 
 convert.make_ical(csv_configs)

@@ -9,8 +9,8 @@ from csv_ical import Convert
 
 
 convert = Convert()
-csv_file_location = 'examples/BostonCruiseTerminalSchedule.csv'
-ical_file_location = 'examples/arrive.ics'
+csv_file_location = '../examples/BostonCruiseTerminalSchedule.csv'
+ical_file_location = '../examples/arrive.ics'
 csv_configs = {
     'HEADER_ROWS_TO_SKIP': 2,
     'CSV_NAME': 3,
@@ -26,12 +26,10 @@ while i < len(convert.csv_data):
     row: List[Any] = convert.csv_data[i]
     start_date = row[2] + '-'+row[csv_configs['CSV_START_DATE']]
     try:
-        row[csv_configs['CSV_START_DATE']] = datetime.strptime(
-            start_date, '%m/%d/%y-%H:%M'
-        )
-        row[csv_configs['CSV_END_DATE']] = \
-            row[csv_configs['CSV_START_DATE']]+timedelta(hours=1)
+        row[csv_configs['CSV_START_DATE']] = datetime.strptime(start_date, '%m/%d/%y-%H:%M')
+        row[csv_configs['CSV_END_DATE']] = row[csv_configs['CSV_START_DATE']]+timedelta(hours=1)
         i += 1
+        print(datetime.strptime(start_date, '%m/%d/%y-%H:%M'))
     except ValueError:
         convert.csv_data.pop(i)
     row[csv_configs['CSV_NAME']] = 'Arrive '+row[csv_configs['CSV_NAME']]
