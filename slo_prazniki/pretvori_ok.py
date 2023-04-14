@@ -25,15 +25,15 @@ i = 0
 while i < len(convert.csv_data):
     row: List[Any] = convert.csv_data[i]
     start_date = row[csv_configs['CSV_START_DATE']]
-    end_date = row[csv_configs['CSV_END_DATE']]
+#    end_date = row[csv_configs['CSV_END_DATE']]
     try:
         start_neobdelan = datetime.strptime(start_date, '%Y-%d-%mT%H:%M:%S')
         row[csv_configs['CSV_START_DATE']] = start_neobdelan.date()
-        end_neobdelan = datetime.strptime(end_date, '%Y-%d-%mT%H:%M:%S')
-        row[csv_configs['CSV_END_DATE']] = end_neobdelan.date()
+#        end_neobdelan = datetime.strptime(end_date, '%Y-%d-%mT%H:%M:%S')
+#        row[csv_configs['CSV_END_DATE']] = end_neobdelan.date()
         i += 1
         print(start_neobdelan.date())
-        print(end_neobdelan.date())
+#        print(end_neobdelan.date())
     except ValueError:
         convert.csv_data.pop(i)
 #        print(convert.csv_data)
