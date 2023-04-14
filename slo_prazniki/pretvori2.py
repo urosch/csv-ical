@@ -27,8 +27,10 @@ while i < len(convert.csv_data):
     start_date = row[csv_configs['CSV_START_DATE']]
     end_date = row[csv_configs['CSV_END_DATE']]
     try:
-        row[csv_configs['CSV_START_DATE']] = datetime.strptime(start_date, '%Y-%d-%mT%H:%M:%S')
-        row[csv_configs['CSV_END_DATE']] = datetime.strptime(end_date, '%Y-%d-%mT%H:%M:%S')
+        startal = datetime.strptime(start_date, '%Y-%d-%mT%H:%M:%S')
+        row[csv_configs['CSV_START_DATE']] = startal.date()
+        konec = datetime.strptime(end_date, '%Y-%d-%mT%H:%M:%S')
+        row[csv_configs['CSV_END_DATE']] = konec.date()
         i += 1
     except ValueError:
         convert.csv_data.pop(i)
